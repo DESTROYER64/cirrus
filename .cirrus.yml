@@ -9,8 +9,8 @@ task:
 
   env:
     CIRRUS_WORKING_DIR: "/tmp/ci"
-    DRIVE: ""
-    BOTTOKEN: ""
+    DRIVE: "ENCRYPTED[ef276603d333e90dbb1979d1090863d8b4050e36a46cce9ea4033685208b6d35b3f95b845f9757ecc52dfc77c8d6eddf]"
+    BOTTOKEN: "ENCRYPTED[f9a6182346c4ab45a6e8c9b2e688e3dc3f77aab24cc5e47a39680454d1418ace115f7c393ed4fc03345f6848ac0ff179]"
 
   download_cc_background_script:
     - bash download_ccache.sh
