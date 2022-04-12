@@ -1,0 +1,22 @@
+task:
+ 
+  name: Awaken
+  timeout_in: 120m
+  container:
+    dockerfile: Dockerfile
+    cpu: 8
+    memory: 32G
+
+  env:
+    CIRRUS_WORKING_DIR: "/tmp/ci"
+    DRIVE: ""
+    BOTTOKEN: ""
+
+  download_cc_background_script:
+    - bash download_ccache.sh
+  sync_script:
+    - bash sync.sh
+  build_script:
+    - bash build.sh
+  upload_ccache_script:
+    - bash upload_ccache.sh
