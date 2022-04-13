@@ -12,26 +12,26 @@ ccache -o compression=true # Will save times and data to download and upload cca
 ccache -z # Clear old stats, so monitor script will provide real ccache statistics
 
 # Next 8 lines should be run first to collect ccache and then upload, after doning it 1 or 2 times, our ccache will help to build without these 8 lines.
-make api-stubs-docs || echo no problem, we need ccache
-make system-api-stubs-docs || echo no problem we need ccache
-make test-api-stubs-docs || echo no problem, we need ccache
-make bacon -j10 & # dont remove that '&'
-sleep 85m
-kill %1
-ccache -s
+#make api-stubs-docs || echo no problem, we need ccache
+#make system-api-stubs-docs || echo no problem we need ccache
+#make test-api-stubs-docs || echo no problem, we need ccache
+#make bacon -j10 & # dont remove that '&'
+#sleep 85m
+#kill %1
+#ccache -s
 #and dont use below codes for first 1 or 2 times, to get ccache uploaded,
 
 
 # upload function for uploading rom zip file! I don't want unwanted builds in my google drive haha!
-up(){
-	curl --upload-file $1 http://oshi.at/nossl
+#up(){
+#	curl --upload-file $1 http://oshi.at/nossl
 	# 14 days, 10 GB limit
-}
+#}
 
 # It's recommended to use google drive(rclone) as upload solution for coping with the time limit. Un-comment next 3 lines to upload with rclone in drive. Also change apon and junk according to your config name, uploading folder of drive
-#up(){
-#	time rclone copy $1 cirrus:junk -P  
-#}
+up(){
+	time rclone copy $1 cirrus:build -P  
+}
 
 tg(){
 	bot_api=${BOTTOKEN} # Your tg bot api, dont use my one haha, it's better to encrypt bot api too.
@@ -49,8 +49,8 @@ id=1999633661 # Your telegram id
 #make system-api-stubs-docs || echo no problem
 #make test-api-stubs-docs || echo no problem
 #
-#make bacon -j10 \
-#	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
-#$send_zip" \
-#	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
-#ccache -s # Let's print ccache statistics finally
+make bacon -j10 \
+	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
+$send_zip" \
+	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
+ccache -s # Let's print ccache statistics finally
