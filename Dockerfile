@@ -6,12 +6,12 @@ WORKDIR /tmp
 
 RUN apt-get -yqq update \
     && apt-get install --no-install-recommends -yqq git
-
-RUN git clone https://github.com/akhilnarang/scripts \
-    && cd scripts && bash setup/android_build_env.sh \
     && echo 'en_US.UTF-8 UTF-8' > /etc/locale.gen && /usr/sbin/locale-gen \
     && TZ=Asia/Kolkata \
     && ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+    
+RUN git clone https://github.com/akhilnarang/scripts.git \
+    && cd scripts && bash setup/android_build_env.sh
 
 RUN git clone https://github.com/ninja-build/ninja.git \
     && cd ninja && git reset --hard 25cdbae && ./configure.py --bootstrap \
