@@ -16,7 +16,7 @@ make api-stubs-docs || echo no problem, we need ccache
 make system-api-stubs-docs || echo no problem we need ccache
 make test-api-stubs-docs || echo no problem, we need ccache
 make bacon -j10 & # dont remove that '&'
-sleep 15m
+sleep 95m
 kill %1
 ccache -s
 #and dont use below codes for first 1 or 2 times, to get ccache uploaded,
