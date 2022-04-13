@@ -11,5 +11,7 @@ ccache_upload ()
 	rclone copy --drive-chunk-size 256M --stats 1s $1.tar.zst cirrus:ccache/ci2 -P
 }
 
-cd /tmp
+mkdir -p ~/.config/rclone
+echo "$DRIVE" > ~/.config/rclone/rclone.conf
+
 ccache_upload ccache
