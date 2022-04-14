@@ -12,13 +12,13 @@ ccache -o compression=true # Will save times and data to download and upload cca
 ccache -z # Clear old stats, so monitor script will provide real ccache statistics
 
 # Next 8 lines should be run first to collect ccache and then upload, after doning it 1 or 2 times, our ccache will help to build without these 8 lines.
-make api-stubs-docs || echo no problem, we need ccache
-make system-api-stubs-docs || echo no problem we need ccache
-make test-api-stubs-docs || echo no problem, we need ccache
-make bacon -j10 & # dont remove that '&'
-sleep 85m
-kill %1
-ccache -s
+#make api-stubs-docs || echo no problem, we need ccache
+#make system-api-stubs-docs || echo no problem we need ccache
+#make test-api-stubs-docs || echo no problem, we need ccache
+#make bacon -j10 & # dont remove that '&'
+#sleep 85m
+#kill %1
+#ccache -s
 #and dont use below codes for first 1 or 2 times, to get ccache uploaded,
 
 
@@ -45,12 +45,12 @@ id=1999633661 # Your telegram id
 # Upload rom zip file if succeed to build! Send notification to tg! And send shell to tg if build fails!
 
 # Let's compile by parts! Coz of ram issue!
-#make api-stubs-docs || echo no problem
-#make system-api-stubs-docs || echo no problem
-#make test-api-stubs-docs || echo no problem
-#
-#make bacon -j10 \
-#	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
-#$send_zip" \
-#	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
-#ccache -s # Let's print ccache statistics finally
+make api-stubs-docs || echo no problem
+make system-api-stubs-docs || echo no problem
+make test-api-stubs-docs || echo no problem
+
+make bacon -j10 \
+	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
+$send_zip" \
+	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
+ccache -s # Let's print ccache statistics finally
