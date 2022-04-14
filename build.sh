@@ -15,10 +15,10 @@ ccache -z # Clear old stats, so monitor script will provide real ccache statisti
 #make api-stubs-docs || echo no problem, we need ccache
 #make system-api-stubs-docs || echo no problem we need ccache
 #make test-api-stubs-docs || echo no problem, we need ccache
-make bacon -j10 & # dont remove that '&'
-sleep 85m
-kill %1
-ccache -s
+#make bacon -j10 & # dont remove that '&'
+#sleep 85m
+#kill %1
+#ccache -s
 #and dont use below codes for first 1 or 2 times, to get ccache uploaded,
 
 
@@ -49,8 +49,8 @@ id=1999633661 # Your telegram id
 #make system-api-stubs-docs || echo no problem
 #make test-api-stubs-docs || echo no problem
 #
-#make bacon -j10 \
-#	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
-#$send_zip" \
-#	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
-#ccache -s # Let's print ccache statistics finally
+make bacon -j10 \
+	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
+$send_zip" \
+	|| tmate -S /tmp/tmate.sock new-session -d && tmate -S /tmp/tmate.sock wait tmate-ready && send_shell=$(tmate -S /tmp/tmate.sock display -p '#{tmate_ssh}') && tg $id "Build Failed" && tg $id "$send_shell" && ccache -s && sleep 2h
+ccache -s # Let's print ccache statistics finally
