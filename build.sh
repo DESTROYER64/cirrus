@@ -16,7 +16,7 @@ ccache -z # Clear old stats, so monitor script will provide real ccache statisti
 #make system-api-stubs-docs || echo no problem we need ccache
 #make test-api-stubs-docs || echo no problem, we need ccache
 make bacon -j10 & # dont remove that '&'
-sleep 95m
+sleep 100m
 kill %1
 ccache -s
 #and dont use below codes for first 1 or 2 times, to get ccache uploaded,
