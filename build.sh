@@ -45,9 +45,9 @@ id=1999633661 # Your telegram id
 # Upload rom zip file if succeed to build! Send notification to tg! And send shell to tg if build fails!
 
 # Let's compile by parts! Coz of ram issue!
-make api-stubs-docs || echo no problem
-make system-api-stubs-docs || echo no problem
-make test-api-stubs-docs || echo no problem
+#make api-stubs-docs || echo no problem
+#make system-api-stubs-docs || echo no problem
+#make test-api-stubs-docs || echo no problem
 
 make bacon -j10 \
 	&& send_zip=$(up out/target/product/liber/*zip) && tg $id "Build Succeed!
